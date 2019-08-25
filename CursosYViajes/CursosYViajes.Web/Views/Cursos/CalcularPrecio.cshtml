@@ -1,0 +1,56 @@
+﻿@model CursosYViajes.Models.Cursos.CalculadorPrecioModel
+
+@{
+    ViewData["Title"] = "CalcularPrecio";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>CalcularPrecio</h2>
+
+<h4>CalculadorPrecioModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CalcularPrecio">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="IdCurso" class="control-label"></label>
+                <input asp-for="IdCurso" class="form-control" />
+                <span asp-validation-for="IdCurso" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NombreCurso" class="control-label"></label>
+                <input asp-for="NombreCurso" class="form-control" />
+                <span asp-validation-for="NombreCurso" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FechaEntrada" class="control-label"></label>
+                <input asp-for="FechaEntrada" class="form-control" />
+                <span asp-validation-for="FechaEntrada" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumeroSemanas" class="control-label"></label>
+                <input asp-for="NumeroSemanas" class="form-control" />
+                <span asp-validation-for="NumeroSemanas" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TipoDeHospedaje" class="control-label"></label>
+                <input asp-for="TipoDeHospedaje" class="form-control" />
+                <span asp-validation-for="TipoDeHospedaje" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PrecioCurso" class="control-label"></label>
+                <input asp-for="PrecioCurso" class="form-control" />
+                <span asp-validation-for="PrecioCurso" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

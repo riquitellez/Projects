@@ -1,0 +1,23 @@
+﻿@model CursosYViajes.Models.Alumnos.DarDeBajaAlumnoModel
+
+@{
+    ViewData["Title"] = "Dar de baja";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Dar de baja</h2>
+
+<h3>¿Seguro que quieres dar de baja a este usuario?</h3>
+<div>
+    <hr />        
+    <form asp-action="Delete">
+        <input asp-for="IdAlumno" class="form-control" type="hidden" />
+        <div class="form-group">
+            <label asp-for="FechaDeBaja" class="control-label"></label>
+            <input asp-for="FechaDeBaja" class="form-control" />
+            <span asp-validation-for="FechaDeBaja" class="text-danger"></span>
+        </div>
+        <input type="submit" value="Dar de baja" class="btn btn-default" /> |
+        <a asp-action="Index">Volver al listado de alumnos</a>
+    </form>
+</div>

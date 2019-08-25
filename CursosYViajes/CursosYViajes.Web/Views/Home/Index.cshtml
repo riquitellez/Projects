@@ -1,0 +1,90 @@
+﻿@model CursosYViajes.Models.Home.HomeModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>View</h2>
+
+<div>
+    <h4>HomeModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Info:
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Info)
+        </dd>
+        <dt>
+            Teléfono:
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Telefono)
+        </dd>
+    </dl>
+    @if (Model.Ciudades != null && Model.Ciudades.Any())
+    {
+    <ul>
+        @foreach (var item in Model.Ciudades)
+        {
+            <li>@item</li>
+        }
+    </ul>
+    }
+    @if (Model.Direccion != null)
+
+    {
+        <dl class="dl-horizontal">
+            <dt>
+                Calle:
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Direccion.Calle)
+            </dd>
+            <dt>
+                Número:
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Direccion.Numero)
+            </dd>
+            <dt>
+                Piso:
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Direccion.Piso)
+            </dd>
+            <dt>
+                Puerta:
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Direccion.Puerta)
+            </dd>
+            <dt>
+                Localidad:
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Direccion.Localidad)
+            </dd>
+            <dt>
+                Provincia:
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Direccion.Provincia)
+            </dd>
+            <dt>
+                Pais:
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Direccion.Pais)
+            </dd>
+            <dt>
+                CP:
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Direccion.CodigoPostal)
+            </dd>
+        </dl>
+    }
+</div>

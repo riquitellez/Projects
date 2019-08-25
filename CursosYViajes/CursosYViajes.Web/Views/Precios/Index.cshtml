@@ -1,0 +1,41 @@
+﻿@model IEnumerable<CursosYViajes.Models.Precios.CursoModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Calcular Precio", "CalcularPrecios", "Precios")
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pais)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pais)
+            </td>
+            <td>
+                @Html.ActionLink("Precio Curso", "PreciosCurso", new { idCurso = item.IdCurso })|
+                @Html.ActionLink("Precio Hospedaje", "PreciosHospedaje", new { idCurso = item.IdCurso })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

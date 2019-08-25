@@ -1,0 +1,108 @@
+﻿@model CursosYViajes.Models.Cursos.DetallesCursoModel
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Detalles del curso</h2>
+
+<div>
+    <h4>DetallesCursoModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NombrePais)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NombrePais)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PrecioPorSemana)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PrecioPorSemana)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaDeAlta)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FechaDeAlta)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaDeBaja)
+        </dt>
+
+        <dd>
+            @if (Model.FechaDeBaja != null)
+            {
+                string fechaBaja = Model.FechaDeBaja.Value.ToShortDateString();
+                <label>@fechaBaja</label>
+            }
+        </dd>
+    </dl>
+    @if (Model.Alumnos != null && Model.Alumnos.Any())
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        <label>Nombre del Alumno</label>
+                    </th>
+                    <th>
+                        <label>Apellidos</label>
+                    </th>
+                    <th>
+                        <label>Documento</label>
+                    </th>
+                    <th>
+                        <label>Fecha de baja en curso</label>
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Alumnos)
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Value.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Value.Apellidos)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Value.DocumentoDeIdentidad)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Value.FechaDeBaja)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Modificar Inscripción", "EditMatricula", "Cursos", new {idCursoPorAlumno = item.Key, idAlumno = item.Value.IdAlumno, idCurso = Model.IdCurso }) |
+                        @Html.ActionLink("Detalles", "Details", "Alumnos", new { idAlumno = item.Value.IdAlumno }) |
+                        @if (item.Value.FechaDeBaja == null)
+                        {
+                            @Html.ActionLink("Dar de baja en curso", "DeleteMatricula", "Cursos", new { idAlumno = item.Value.IdAlumno, idCurso = Model.IdCurso }) 
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Reactivar en curso", "ReactivarAltaMatricula", "Cursos", new {idCursoPorAlumno = item.Key, Model.IdCurso}) 
+                        }
+
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new {idCurso = Model.IdCurso}) |
+    <a asp-action="Index">Volver al listado</a>
+</div>

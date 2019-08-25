@@ -1,0 +1,52 @@
+﻿@model CursosYViajes.Models.Cursos.DeleteMatriculaModel
+
+@{
+    ViewData["Title"] = "DeleteMatricula";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Eliminar matricula</h2>
+
+<h3>¿Seguro que desea eliminar esta matrícula?</h3>
+<div>
+    <hr />
+    <form asp-action="DeleteMatricula">
+        <input asp-for="IdCurso" class="form-control" type="hidden" />
+        <input asp-for="IdAlumno" class="form-control" type="hidden" />
+        <input asp-for="IdCursoPorAlumno" class="form-control" type="hidden" />
+        <dl class="dl-horizontal">           
+            <dt>
+                @Html.DisplayNameFor(model => model.NombreCurso)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.NombreCurso)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.PaisCurso)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.PaisCurso)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.NombreAlumno)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.NombreAlumno)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.ApellidosAlumno)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ApellidosAlumno)
+            </dd>           
+        </dl>
+        <div class="form-group">
+            <label asp-for="FechaDeBaja" class="control-label"></label>
+            <input asp-for="FechaDeBaja" class="form-control" />
+            <span asp-validation-for="FechaDeBaja" class="text-danger"></span>
+        </div>
+        <input type="submit" value="Dar de baja" class="btn btn-default" /> |
+        <a asp-action="Details">Volver a detalles</a>
+    </form>
+</div>
+

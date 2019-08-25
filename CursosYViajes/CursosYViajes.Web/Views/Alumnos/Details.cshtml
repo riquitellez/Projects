@@ -1,0 +1,101 @@
+﻿@model CursosYViajes.Models.Alumnos.DetallesAlumnoModel
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Detalles del alumno</h2>
+
+<div>
+    <hr />
+    @Html.HiddenFor(model => model.IdAlumno)
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Apellidos)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Apellidos)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DocumentoDeIdentidad)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DocumentoDeIdentidad)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaDeAlta)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FechaDeAlta)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaDeBaja)
+        </dt>
+        <dd>
+            @if (Model.FechaDeBaja != null)
+            {
+                string fechaBaja = Model.FechaDeBaja.Value.ToShortDateString();
+                <label>@fechaBaja</label>
+            }
+        </dd>
+
+    </dl>
+    @if (Model.Cursos != null && Model.Cursos.Any())
+    {
+        <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    <label> Nombre del Curso</label>
+                </th>
+                <th>
+                    <label> País</label>
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Cursos)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Pais)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Editar", "Edit","Cursos", new {idCurso = item.IdCurso}) 
+                        @Html.ActionLink("Detalles", "DetailsCurso", new {idCurso = item.IdCurso}) 
+                    </td>
+                </tr>
+            }
+        </tbody>
+        </table>
+    }
+</div>
+<div>
+    @Html.ActionLink("Editar", "Edit", new { idAlumno = Model.IdAlumno }) |
+    @if (Model.FechaDeBaja == null)
+    {
+        @Html.ActionLink("Dar de baja", "Delete", new { idAlumno = Model.IdAlumno })
+    }
+    else
+    {
+        @Html.ActionLink("Reactivar", "Reactivar", new { idAlumno = Model.IdAlumno })
+    }
+    | <a asp-action="Index">Volver al listado</a>
+</div>

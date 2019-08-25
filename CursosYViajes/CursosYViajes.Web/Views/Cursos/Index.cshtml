@@ -1,0 +1,87 @@
+﻿@model CursosYViajes.Models.Cursos.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Listado de cursos</h2>
+
+<p>
+    <a asp-action="Create">Crear Curso</a>
+</p>
+
+@if (Model.Buscador != null)
+{
+<div>
+    <h4>
+        Buscador de cursos
+    </h4>
+    <form asp-action="Index">
+        <div class="form-group">
+            <label class="control-label">País</label>
+            @Html.DropDownListFor(x => Model.Buscador.IdPais, new SelectList(Model.Buscador.ComboPaises.Select(y => new SelectListItem(y.Value, y.Key.ToString())), "Value", "Text"))
+        </div>
+        <div class="form-group">
+            <label class="control-label">Texto a buscar</label>
+            <input asp-for="Buscador.TextoBuscador" class="form-control" />
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Buscar" class="btn btn-default" />
+        </div>
+    </form>
+</div>
+}
+@if (Model.Cursos != null && Model.Cursos.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Nombre del Curso
+                </th>
+                <th>
+                    País
+                </th>
+                <th>
+                    Fecha de baja
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Cursos)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Pais)
+                    </td>
+                    <td>
+                        @if (item.FechaDeBaja != null)
+                        {
+                            string fechaBaja = item.FechaDeBaja.Value.ToShortDateString();
+                            <label>@fechaBaja</label>
+                        }
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { idCurso = item.IdCurso }) |
+                        @Html.ActionLink("Details", "Details", new { idCurso = item.IdCurso }) |
+                        @if (item.FechaDeBaja == null)
+                        {
+                            @Html.ActionLink("Dar de baja", "Delete", new { idCurso = item.IdCurso })
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Reactivar", "Reactivar", new { idCurso = item.IdCurso })
+                        }
+                        | @Html.ActionLink("Matricular Alumno", "Matricular", new { idCurso = item.IdCurso })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+

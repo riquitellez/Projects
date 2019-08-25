@@ -1,0 +1,57 @@
+﻿@model CursosYViajes.Models.Precios.CalculadorPreciosModel
+
+@{
+    ViewData["Title"] = "CalcularPrecios";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>CalcularPrecios</h2>
+
+<div>
+    <h4>CalculadorPreciosModel</h4>
+    <hr />
+    <form asp-action="CalcularPrecios">
+        <label>Curso</label>
+        <div class="form-group">
+            @Html.DropDownListFor(x => Model.IdCursoSeleccionado, new SelectList(Model.Cursos.Select(y => new SelectListItem(y.Value, y.Key.ToString())), "Value", "Text"))
+        </div>
+        <label>Tipo de hospedaje</label>
+        <div class="form-group">
+            @Html.DropDownListFor(x => Model.TipoDeHospedajeSeleccionado, new SelectList(Model.TiposDeHospedaje.Select(y => new SelectListItem(y.Value, y.Key.ToString())), "Value", "Text"))
+        </div>
+        <label>Primera semana</label>
+        <div class="form-group">
+            @Html.DropDownListFor(x => Model.IdSemanaInicialSeleccionada, new SelectList(Model.SemanasIniciales.Select(y => new SelectListItem(y.Value, y.Key.ToString())), "Value", "Text"))
+        </div>
+        <label>Última semana</label>
+        <div class="form-group">
+            @Html.DropDownListFor(x => Model.IdSemanaFinalSeleccionada, new SelectList(Model.SemanasFinales.Select(y => new SelectListItem(y.Value, y.Key.ToString())), "Value", "Text"))
+        </div>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.PrecioCurso)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.PrecioCurso)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.PrecioHospedaje)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.PrecioHospedaje)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.PrecioTotal)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.PrecioTotal)
+            </dd>
+        </dl>
+        <div class="form-group">
+            <input type="submit" value="Calcular Precios" class="btn btn-default" />
+        </div>
+    </form>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

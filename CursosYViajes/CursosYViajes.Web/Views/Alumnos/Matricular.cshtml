@@ -1,0 +1,43 @@
+﻿@model CursosYViajes.Models.Alumnos.MatricularAlumnoModel
+
+@{
+    ViewData["Title"] = "Matricular";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Matricular alumno</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Matricular">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input asp-for="IdAlumno" class="form-control" type="hidden" />
+            <div class="form-group">
+                <label asp-for="NombreAlumno" class="control-label"></label>
+                <label class="control-label">@Model.NombreAlumno</label>
+            </div>
+            <div class="form-group">
+                <label asp-for="ApellidoAlumno" class="control-label"></label>
+                <label class="control-label">@Model.ApellidoAlumno</label>
+            </div>
+            <div class="form-group">
+                @Html.DropDownListFor(x => Model.IdCurso, new SelectList(Model.Cursos.Select(y => new SelectListItem(y.Value, y.Key.ToString())), "Value", "Text"))
+            </div>
+
+            <div class="form-group">
+                <label asp-for="FechaDeAlta" class="control-label"></label>
+                <input asp-for="FechaDeAlta" class="form-control" />
+                <span asp-validation-for="FechaDeAlta" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Matricular" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Volver al listado</a>
+</div>
+

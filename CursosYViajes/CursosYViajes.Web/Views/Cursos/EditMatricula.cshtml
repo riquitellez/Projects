@@ -1,0 +1,50 @@
+﻿@model CursosYViajes.Models.Cursos.EditMatriculaModel
+
+@{
+    ViewData["Title"] = "EditMatricula";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Editar matrícula</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditMatricula">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input asp-for="IdCursoPorAlumno" class="form-control" type="hidden" />
+            <input asp-for="IdCurso" class="form-control" type="hidden" />
+            <input asp-for="IdAlumno" class="form-control" type="hidden" />
+            <div class="form-group">
+                <label class="control-label">Nombre Alumno:</label>
+                <label class="form-control">@Model.NombreAlumno</label>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Apellidos Alumno:</label>
+                <label class="form-control">@Model.ApellidosAlumno</label>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Nombre Curso:</label>
+                <label class="form-control">@Model.NombreCurso</label>
+            </div>
+            <div class="form-group">
+                <label asp-for="FechaDeAlta" class="control-label"></label>
+                <input asp-for="FechaDeAlta" class="form-control" />
+                <span asp-validation-for="FechaDeAlta" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FechaDeBaja" class="control-label"></label>
+                <input asp-for="FechaDeBaja" class="form-control" />
+                <span asp-validation-for="FechaDeBaja" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Guardar cambios" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Volver al listado</a>
+</div>
+

@@ -1,0 +1,57 @@
+﻿@model CursosYViajes.Models.Precios.CursoPrecioModel
+
+@{
+    ViewData["Title"] = "PreciosCurso";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>PreciosCurso</h2>
+
+<div>
+    <h4>CursoPrecioModel</h4>
+    <hr />
+    <form asp-action="PreciosCurso">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input asp-for="IdCurso" class="form-control" type="hidden" />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.IdCurso)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.IdCurso)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Nombre)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Pais)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Pais)
+            </dd>
+        </dl>
+        <dl class="dl-horizontal">
+            @if (Model.PrecioPorSemana != null && Model.PrecioPorSemana.Any())
+            {
+                for (int i = 1; i <= 53; i++)
+                {
+                    <dt>
+                        Semana @i
+                    </dt>
+                    <dd>
+                        @Html.EditorFor(model => model.PrecioPorSemana[i])
+                    </dd>
+                }
+            }
+        </dl>
+        <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-default" />
+        </div>
+    </form>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

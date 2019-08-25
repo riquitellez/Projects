@@ -1,0 +1,15 @@
+{
+  "info": "Esta intranet pertenece a la empresa RT",
+  "dir": {
+    "calle": "Calle de la comunicación",
+    "num": 12,
+    "piso": "BJ",
+    "puerta": "A",
+    "localidad": "Madrid",
+    "prov": "Madrid",
+    "pais": "España",
+    "cp": "28028"
+  },
+  "telf": "635556989",
+  "ciudades": ["Almeria", "Palencia", "Oviedo", "Zamora"]
+}

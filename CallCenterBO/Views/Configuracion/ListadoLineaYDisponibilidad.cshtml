@@ -1,0 +1,65 @@
+﻿@model CallCenterBO.Models.Configuracion.ListadoLineaDisponibilidadModel
+@using CallCenterBO.Util
+
+@{
+    ViewData["Title"] = "ListadoLineaYDisponibilidad";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Listado de lineas para asignar</h2>
+<p>
+    Asignación para fecha
+    <input type="date"/>
+</p>
+<p>
+    <a asp-action="Guardar Asignación" class="btn btn-default">Guardar Asignación</a>
+    <a asp-action="CrearLinea" class="btn btn-default">Añadir linea</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Linea</th>
+            <th>Número</th>
+            <th>Empresa</th>
+            <th>Profesor</th>
+            <th>Hora inicio</th>
+            <th>Hora fin</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.DisponibilidadesPorLinea)
+        {
+        <tr>
+            <td>
+                @item.Value.NombreLinea
+            </td>
+            <td>
+                @item.Value.NumeroLinea
+            </td>
+            <td>
+                @item.Value.NombreEmpresa
+            </td>
+            <td>
+                @{ 
+                    var profesores = item.Value.IdEmpresa.FiltrarPorEmpresa(Model.Profesores);
+                }
+                @Html.DropDownListFor(x => item.Value.IdProfesorSeleccionado, new SelectList(profesores.Select(y => new SelectListItem(y.Value.NombreProfesor, y.Key.ToString())), "Value", "Text"))
+            </td>
+            <td>
+                <input type="time" id="appt" name="appt"
+                       min="07:30" max="20:00" required>
+            </td>
+            <td>
+                <input type="time" id="appt" name="appt"
+                       min="07:30" max="20:00" required>
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

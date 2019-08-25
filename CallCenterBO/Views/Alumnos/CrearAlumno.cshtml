@@ -1,0 +1,77 @@
+﻿@model CallCenterBO.Models.Alumnos.CrearAlumnoModel
+
+@{
+    ViewData["Title"] = "CrearAlumno";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Crear Alumno</h2>
+
+<h4>Crear Alumno</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CrearAlumno">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <p><mark>@Model.Mensaje</mark></p>
+            <div class="form-group">
+                <label asp-for="Codigo" class="control-label"></label>
+                <input asp-for="Codigo" class="form-control" />
+                <span asp-validation-for="Codigo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Nombre" class="control-label"></label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Apellidos" class="control-label"></label>
+                <input asp-for="Apellidos" class="form-control" />
+                <span asp-validation-for="Apellidos" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Empresa</label>
+                @Html.DropDownListFor(x => Model.IdEmpresaSeleccionada, new SelectList(Model.Empresas.Select(y => new SelectListItem(y.Value, y.Key.ToString())), "Value", "Text"))
+            </div>
+            <div class="form-group">
+                <label class="control-label">Empresa no incluida</label>
+                <input asp-for="NombreEmpresa" class="form-control" />
+                <span asp-validation-for="NombreEmpresa" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Plan</label>
+                @Html.DropDownListFor(x => Model.IdPlanSeleccionado, new SelectList(Model.Planes.Select(y => new SelectListItem(y.Value, y.Key.ToString())), "Value", "Text"))
+            </div>
+            <div class="form-group">
+                <label class="control-label">Nivel</label>
+                @Html.DropDownListFor(x => Model.IdNivelSeleccionado, new SelectList(Model.Niveles.Select(y => new SelectListItem(y.Value, y.Key.ToString())), "Value", "Text"))
+            </div>
+            <div class="form-group">
+                <label asp-for="Timetable" class="control-label"></label>
+                <input asp-for="Timetable" class="form-control" />
+                <span asp-validation-for="Timetable" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FechaDeAlta" class="control-label"></label>
+                <input asp-for="FechaDeAlta" class="form-control" />
+                <span asp-validation-for="FechaDeAlta" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Volver al listado</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

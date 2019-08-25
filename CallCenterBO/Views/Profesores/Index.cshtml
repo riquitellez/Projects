@@ -1,0 +1,82 @@
+﻿@model CallCenterBO.Models.Profesores.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="CrearProfesor">Añadir profesor</a>
+</p>
+@if (Model.Buscador != null)
+{
+    <div>
+        <h4>
+            Buscador de Profesores
+        </h4>
+        <form asp-action="Index">
+            <div class="form-group">
+                <label class="control-label">Texto a buscar</label>
+                <input asp-for="Buscador.TextoBuscador" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Buscar" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+}
+
+@if (Model.ListadoProfesores != null && Model.ListadoProfesores.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Nombre
+                </th>
+                <th>
+                    Empresa
+                </th>
+                <th>
+                    Fecha de Baja
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.ListadoProfesores)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NombreEmpresa)
+                    </td>                 
+                    <td>
+                        @if (item.FechaDeBaja != null)
+                        {
+                            string fechaBaja = item.FechaDeBaja.Value.ToShortDateString();
+                            <label>@fechaBaja</label>
+                        }
+                    </td>
+                    <td>
+                        @Html.ActionLink("Editar", "EditarProfesor", new { idProfesor = item.Id }) |
+                        @Html.ActionLink("Detalles", "DetallesProfesor", new { idProfesor = item.Id }) |
+                        @if (item.FechaDeBaja == null)
+                        {
+                            @Html.ActionLink("Dar de baja", "DarDeBajaProfesor", new { idProfesor = item.Id})
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Reactivar", "Reactivar", new { idProfesor = item.Id })
+                        }
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

@@ -1,0 +1,98 @@
+﻿@model CallCenterBO.Models.Alumnos.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Listado de alumnos</h2>
+
+<p>
+</p>
+@if (Model.Buscador != null)
+{
+    <div>
+        <form asp-action="Index">
+            <div class="form-group">
+                <label class="control-label">Buscar alumno</label>
+                <input asp-for="Buscador.TextoBuscador" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Buscar" class="btn btn-default" />
+                <a asp-action="CrearAlumno" class="btn btn-default c-suscribete">Crear alumno</a>
+            </div>
+        </form>
+    </div>
+}
+
+@if (Model.Alumnos != null && Model.Alumnos.Any())
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    Código
+                </th>
+                <th>
+                    Nombre
+                </th>
+                <th>
+                    Apellidos
+                </th>
+                <th>
+                    Empresa
+                </th>
+                <th>
+                    Timetable
+                </th>
+                <th>
+                    Clases dadas
+                </th>
+                <th>
+                    Baja
+                </th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Alumnos)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Codigo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Apellidos)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NombreEmpresa)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TimeTable)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ClasesDadasEnLaSemana)
+                </td>
+                <td>
+                    @if (item.FechaDeBaja != null)
+                    {
+                        string fechaBaja = item.FechaDeBaja.Value.ToShortDateString();
+                        <label>@fechaBaja</label>
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "EditarAlumno", new { idAlumno = item.IdAlumno }) |
+                    @Html.ActionLink("Detalles", "DetallesAlumno", new { idAlumno = item.IdAlumno }) |
+                    @if (item.FechaDeBaja == null) { @Html.ActionLink("Dar de baja", "DarDeBajaAlumno", new { idAlumno = item.IdAlumno })  } else { @Html.ActionLink("Reactivar", "Reactivar", new { idAlumno = item.IdAlumno })  }
+
+                </td>
+                <td class="btn btn-primary">Iniciar clase</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+}

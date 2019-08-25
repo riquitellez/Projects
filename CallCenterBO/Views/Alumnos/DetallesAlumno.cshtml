@@ -1,0 +1,139 @@
+﻿@model CallCenterBO.Models.Alumnos.DetallesAlumnoModel
+
+@{
+    ViewData["Title"] = "DetallesAlumno";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>DetallesAlumno</h2>
+
+<div>
+    <h4>DetallesAlumnoModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IdAlumno)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IdAlumno)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Codigo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Codigo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Apellidos)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Apellidos)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NombrePlan)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NombrePlan)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NombreNivel)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NombreNivel)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NombreEmpresa)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NombreEmpresa)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Timetable)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Timetable)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaDeAlta)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FechaDeAlta)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaDeBaja)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FechaDeBaja)
+        </dd>
+    </dl>
+
+    <h5>Clases dadas</h5>   
+        
+            <hr />
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Fecha inicio
+                        </th>
+                        <th>
+                            Fecha fin
+                        </th>
+                        <th>
+                            Profesor
+                        </th>
+                        <th>
+                            Linea
+                        </th>
+                        <th>
+                            Incidencia
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        @if (Model.ClasesDadas != null && Model.ClasesDadas.Any())
+                         {
+                            foreach (var claseDada in Model.ClasesDadas)
+                            {
+                                <td>
+                                    @claseDada.FechaHoraInicio.ToString("MM/dd/yy H:mm")
+                                </td>
+                                <td>
+                                    @claseDada.FechaHoraFin.ToString("MM/dd/yy H:mm")
+                                </td>
+                                <td>
+                                    @claseDada.NombreProfesor
+                                </td>
+                                <td>
+                                    @claseDada.Linea
+                                </td>
+
+                                @if (!string.IsNullOrWhiteSpace(claseDada.TipoDeIncidencia))
+                                 {
+                                    <td>
+                                        @claseDada.TipoDeIncidencia
+                                    </td>
+                                 }
+                            }
+                         }
+                    </tr>
+                </tbody>
+            </table>
+</div>
+<div>
+    @Html.ActionLink("Edit", "EditarAlumno", new {idAlumno = Model.IdAlumno}) |
+    <a asp-action="Index">Back to List</a>
+</div>

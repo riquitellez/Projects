@@ -1,0 +1,60 @@
+﻿@model CallCenterBO.Models.Clases.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+@if (Model.ListadoDeClasesDadas != null && Model.ListadoDeClasesDadas.Any())
+{
+    <table class="table">
+    <thead>
+        <tr>
+            <th>
+                Codigo de alumno
+            </th>
+            <th>
+                Nombre Profesor
+            </th>
+            <th>
+                Fecha Clase
+            </th>
+            <th>
+                Tipo de Incidencia
+            </th>
+            <th>
+                Acciones
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.ListadoDeClasesDadas)
+        {
+        <tr>
+            <td>
+                @item.CodigoAlumno
+            </td>
+            <td>
+                @item.NombreProfesor
+            </td>
+            <td>
+                @item.FechaClase
+            </td>
+            <td>
+                @item.TipoIncidencia
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+}

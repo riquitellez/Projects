@@ -1,0 +1,27 @@
+﻿@model CallCenterBO.Models.Profesores.DarDeBajaProfesorModel
+
+@{
+    ViewData["Title"] = "DarDeBajaProfesor";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Dar de baja</h2>
+
+<h3>¿Está seguro que desea dar de baja a este profesor?</h3>
+<div>
+    <dl class="dl-horizontal">
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+    </dl>
+    <form asp-action="DarDeBajaProfesor">
+        <input asp-for="Id" class="form-control" type="hidden" />
+        <div class="form-group">
+            <label asp-for="FechaDeBaja" class="control-label"></label>
+            <input type="date" asp-for="FechaDeBaja" class="form-control" />
+            <span asp-validation-for="FechaDeBaja" class="text-danger"></span>
+        </div>
+        <input type="submit" value="Dar de baja" class="btn btn-default" /> |
+        <a asp-action="Index">Volver al listado de profesores</a>
+    </form>
+</div>
